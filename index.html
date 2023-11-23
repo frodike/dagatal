@@ -1,54 +1,71 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Dagatal</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            .btn-group button {
-  background-color: #04AA6D; /* Green background */
-  border: 1px solid green; /* Green border */
-  color: white; /* White text */
-  padding: 50px 50px; /* Some padding */
-  cursor: pointer; /* Pointer/hand icon */
-  float: left; /* Float the buttons side by side */
-}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-/* Clear floats (clearfix hack) */
-.btn-group:after {
-  content: "";
-  clear: both;
-  display: table;
-}
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
 
-.btn-group button:not(:last-child) {
-  border-right: none; /* Prevent double borders */
-}
+        .day {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            background-color: #eee;
+            cursor: pointer;
+        }
+    </style>
+    <title>Christmas Calendar</title>
+</head>
+<body>
+    <div class="calendar"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const calendar = document.querySelector('.calendar');
+            const totalDays = 24;
 
-/* Add a background color on hover */
-.btn-group button:hover {
-  background-color: #3e8e41;
-}
-        </style>
-    </head>
-    <body>
-        <script type="text/javascript">
-            function change( el )
-            {
-                if ( el.value === "Open Curtain" )
-                    el.value = "Close Curtain";
-                else
-                    el.value = "Open Curtain";
+            for (let day = 1; day <= totalDays; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.classList.add('day');
+                dayElement.textContent = day;
+
+                dayElement.addEventListener('click', () => revealSurprise(day));
+
+                calendar.appendChild(dayElement);
             }
-            </script>
-<h1>Joladagatal</h1>
-<div class="btn-group">
-    <button type="button" value="Open Curtain" onclick="return change(this);">1</button>
-    <button>2</button>
-    <button>3</button>
-  </div>
-  
-    </body>
+
+            function revealSurprise(day) {
+                const surprise = getSurprise(day);
+                alert(`Day ${day}: ${surprise}`);
+            }
+
+            function getSurprise(day) {
+                switch (day) {
+                    case 1:
+                        return "A special ornament";
+                    case 2:
+                        return "A festive recipe";
+                    // Add more cases for each day
+                    default:
+                        return "No surprise yet!";
+                }
+            }
+        });
+    </script>
+</body>
 </html>
